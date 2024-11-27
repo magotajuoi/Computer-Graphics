@@ -28,8 +28,11 @@ obstacles = [
     pygame.Rect(650, 548, 50, 50),
     pygame.Rect(675, 496, 50, 50),
     pygame.Rect(700, 548, 50, 50),
-    pygame.Rect(50, 325, 200, 30),
-    pygame.Rect(550, 325, 200, 30)
+    pygame.Rect(240, 150, 50, 30),
+    pygame.Rect(50, 300, 200, 30),
+    pygame.Rect(550, 240, 200, 30),
+    pygame.Rect(380, 400, 50, 30),
+    pygame.Rect(480, 340, 50, 30)
 ]
 
 # Define Avatar class
@@ -223,6 +226,7 @@ def apply_power_up_or_down(power_box, avatar, balls):
             pygame.time.set_timer(pygame.USEREVENT + 2, 5000)  # 5 seconds
         elif power_box["box_type"] == "flight":
             avatar.flight = True
+            avatar.gravity = 0
             pygame.time.set_timer(pygame.USEREVENT + 3, 10000)  # 10 seconds
     elif power_box["type"] == "power_down":
         if power_box["box_type"] == "frozen":
@@ -242,8 +246,31 @@ def display_power_text(surface, text):
         text_rect = text_surface.get_rect(center=(WIDTH // 2, HEIGHT // 4))
         surface.blit(text_surface, text_rect)
 
+# Function to show "Game Won" screen
+def show_game_won_screen():
+    window.fill(LIGHT_BLUE)
+    won_font = pygame.font.Font(None, 72)
+    restart_font = pygame.font.Font(None, 36)
+
+    won_text = won_font.render("YOU WON!", True, YELLOW)
+    restart_text = restart_font.render("Press 'R' to Restart or 'Q' to Quit", True, BLACK)
+
+    window.blit(won_text, (WIDTH // 2 - won_text.get_width() // 2, HEIGHT // 3))
+    window.blit(restart_text, (WIDTH // 2 - restart_text.get_width() // 2, HEIGHT // 2))
+    pygame.display.update()
+
+
+# Add game-won state variable
+game_won = False
+# Define the Golden Hoop
+hoop_x = WIDTH // 2 - 40  # Centered at the top
+hoop_y = 50
+hoop_width = 80
+hoop_height = 20
+hoop_rect = pygame.Rect(hoop_x, hoop_y, hoop_width, hoop_height)
+
 # Initialize game objects
-avatar = Avatar(100, 400, 20)
+avatar = Avatar(100, 400, 17)
 ball = Ball(400, 300, 25, RED, 3, 3)
 ball2 = Ball(200, 100, 25, RED, -3, 3)
 power_boxes = []
@@ -251,10 +278,10 @@ power_boxes = []
 # Power-up/down display variables
 power_text = ""
 power_text_start_time = None
-
-# Main game loop
-running = True
 spawn_timer = pygame.time.get_ticks()
+
+running = True
+# Update the game loop
 while running:
     current_time = pygame.time.get_ticks()
     for event in pygame.event.get():
@@ -293,15 +320,22 @@ while running:
         if keys[pygame.K_UP]:
             avatar.start_jump()
 
-    avatar.apply_gravity_and_movement()
-    ball.move()
-    ball2.move()
+    if not game_won and not avatar.frozen:
+        avatar.apply_gravity_and_movement()
+
+    if not game_won:
+        ball.move()
+        ball2.move()
 
     # Check for collision with the avatar
     if check_ball_avatar_collision(ball, avatar) or check_ball_avatar_collision(ball2, avatar):
         if not avatar.invincible:
             print("Game Over!")
             running = False
+
+    # Check if avatar touches the hoop
+    if hoop_rect.colliderect(avatar.blocks[0]):  # Avatar's top-left block for collision detection
+        game_won = True
 
     # Check for power-up/power-down collision with avatar
     for power_box in power_boxes[:]:
@@ -326,8 +360,25 @@ while running:
         color = YELLOW if power_box["type"] == "power_up" else RED
         pygame.draw.rect(window, color, power_box["rect"])
 
+    # Draw the hoop
+    pygame.draw.ellipse(window, YELLOW, hoop_rect)
+    pygame.draw.ellipse(window, BLACK, hoop_rect, 2)  # Add a black border for visibility
+
     # Display power-up/power-down name
     display_power_text(window, power_text)
+
+    # Handle "Game Won" state
+    if game_won:
+        show_game_won_screen()
+        if keys[pygame.K_r]:
+            # Reset game state
+            avatar = Avatar(100, 400, 17)
+            ball = Ball(400, 300, 25, RED, 3, 3)
+            ball2 = Ball(200, 100, 25, RED, -3, 3)
+            power_boxes = []
+            game_won = False
+        if keys[pygame.K_q]:
+            running = False
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)
