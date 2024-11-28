@@ -159,6 +159,16 @@ class Avatar:
             pygame.draw.rect(surface, BLACK, block)
             pygame.draw.rect(surface, WHITE, block, 1)
 
+# Function to show the start screen
+def show_start_screen():
+    window.fill(LIGHT_BLUE)
+    font = pygame.font.Font(None, 72)
+    start_text = font.render("Jumping Blocks", True, YELLOW)
+    prompt_text = font.render("Press 'S' to Start", True, WHITE)
+    window.blit(start_text, (WIDTH // 2 - start_text.get_width() // 2, HEIGHT // 3))
+    window.blit(prompt_text, (WIDTH // 2 - prompt_text.get_width() // 2, HEIGHT // 2))
+    pygame.display.update()
+
 # Define Ball class
 class Ball:
     def __init__(self, x, y, radius, color, velocity_x, velocity_y):
