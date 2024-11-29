@@ -159,7 +159,7 @@ class Avatar:
             pygame.draw.rect(surface, BLACK, block)
             pygame.draw.rect(surface, WHITE, block, 1)
 
-# Function to show the start screen
+# Function to handle start screen
 def show_start_screen():
     window.fill(LIGHT_BLUE)
     font = pygame.font.Font(None, 72)
@@ -168,6 +168,18 @@ def show_start_screen():
     window.blit(start_text, (WIDTH // 2 - start_text.get_width() // 2, HEIGHT // 3))
     window.blit(prompt_text, (WIDTH // 2 - prompt_text.get_width() // 2, HEIGHT // 2))
     pygame.display.update()
+
+# Show start screen
+show_start_screen()
+start_game = False
+while not start_game:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_s]:
+        start_game = True
 
 # Define Ball class
 class Ball:
