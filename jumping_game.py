@@ -1,6 +1,5 @@
 import pygame
 import random
-import time
 
 # Initialize Pygame
 pygame.init()
@@ -268,6 +267,23 @@ def display_power_text(surface, text):
         text_rect = text_surface.get_rect(center=(WIDTH // 2, HEIGHT // 4))
         surface.blit(text_surface, text_rect)
 
+# Function to show "Game Over" screen
+def show_game_over_screen():
+    window.fill(LIGHT_BLUE)
+    game_over_font = pygame.font.Font(None, 72)
+    restart_font = pygame.font.Font(None, 36)
+
+    game_over_text = game_over_font.render("GAME OVER", True, RED)
+    restart_text = restart_font.render("Press 'R' to Restart or 'Q' to Quit", True, BLACK)
+
+    window.blit(game_over_text, (WIDTH // 2 - game_over_text.get_width() // 2, HEIGHT // 3))
+    window.blit(restart_text, (WIDTH // 2 - restart_text.get_width() // 2, HEIGHT // 2))
+    pygame.display.update()
+
+# Add game over state variable
+game_over = False
+
+
 # Function to show "Game Won" screen
 def show_game_won_screen():
     window.fill(LIGHT_BLUE)
@@ -353,7 +369,7 @@ while running:
     if check_ball_avatar_collision(ball, avatar) or check_ball_avatar_collision(ball2, avatar):
         if not avatar.invincible:
             print("Game Over!")
-            running = False
+            game_over = True
 
     # Check if avatar touches the hoop
     if hoop_rect.colliderect(avatar.blocks[0]):  # Avatar's top-left block for collision detection
@@ -388,6 +404,27 @@ while running:
 
     # Display power-up/power-down name
     display_power_text(window, power_text)
+
+    # Handle "Game Over" state
+    if game_over:
+        show_game_over_screen()
+        while game_over:  # Pause the game here until player presses 'R' or 'Q'
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                    game_over = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:  # Restart game
+                        # Reset game state
+                        avatar = Avatar(100, 400, 17)
+                        ball = Ball(400, 300, 25, RED, 3, 3)
+                        ball2 = Ball(200, 100, 25, RED, -3, 3)
+                        power_boxes = []
+                        game_over = False
+                        running = True  # Resume game after restart
+                    elif event.key == pygame.K_q:  # Quit game
+                        running = False
+                        game_over = False
 
     # Handle "Game Won" state
     if game_won:
