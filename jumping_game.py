@@ -27,10 +27,10 @@ obstacles = [
     pygame.Rect(650, 548, 50, 50),
     pygame.Rect(675, 496, 50, 50),
     pygame.Rect(700, 548, 50, 50),
-    pygame.Rect(240, 150, 50, 30),
+    pygame.Rect(230, 130, 50, 30),
     pygame.Rect(50, 300, 200, 30),
     pygame.Rect(550, 240, 200, 30),
-    pygame.Rect(380, 400, 50, 30),
+    pygame.Rect(360, 405, 50, 30),
     pygame.Rect(480, 340, 50, 30)
 ]
 
