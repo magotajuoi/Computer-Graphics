@@ -3,6 +3,7 @@ import random
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
 
 # Set up display
 WIDTH, HEIGHT = 800, 600
@@ -33,6 +34,13 @@ obstacles = [
     pygame.Rect(360, 405, 50, 30),
     pygame.Rect(480, 340, 50, 30)
 ]
+
+# Load sound effects
+jump_sound = pygame.mixer.Sound("jump.wav")
+collision_sound = pygame.mixer.Sound("collision.wav")
+power_up_sound = pygame.mixer.Sound("power_up.wav")
+game_over_sound = pygame.mixer.Sound("game_over.wav")
+game_won_sound = pygame.mixer.Sound("game_won.wav")
 
 # Define Avatar class
 class Avatar:
@@ -102,6 +110,7 @@ class Avatar:
             self.is_jumping = True
             self.velocity_y = self.jump_speed
             self.grounded = False
+            jump_sound.play() 
 
     def is_on_ground(self):
         for block in self.blocks:
@@ -368,6 +377,7 @@ while running:
     # Check for collision with the avatar
     if check_ball_avatar_collision(ball, avatar) or check_ball_avatar_collision(ball2, avatar):
         if not avatar.invincible:
+            collision_sound.play()
             print("Game Over!")
             game_over = True
 
@@ -379,6 +389,7 @@ while running:
     for power_box in power_boxes[:]:
         power_box["rect"].y += power_box["fall_speed"]
         if power_box["rect"].colliderect(avatar.blocks[0]):  # Avatar's top-left block for collision detection
+            power_up_sound.play()
             apply_power_up_or_down(power_box, avatar, [ball, ball2])
             power_boxes.remove(power_box)
 
@@ -407,6 +418,7 @@ while running:
 
     # Handle "Game Over" state
     if game_over:
+        game_over_sound.play()
         show_game_over_screen()
         while game_over:  # Pause the game here until player presses 'R' or 'Q'
             for event in pygame.event.get():
@@ -428,6 +440,7 @@ while running:
 
     # Handle "Game Won" state
     if game_won:
+        game_won_sound.play()
         show_game_won_screen()
         if keys[pygame.K_r]:
             # Reset game state
