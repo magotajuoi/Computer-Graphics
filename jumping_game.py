@@ -147,6 +147,8 @@ class Avatar:
         self.x += self.velocity_x
         self.update_position()
 
+        self.x = max(0, min(WIDTH - self.block_size * 5, self.x))
+
         if self.collide_with_obstacles():
             self.x -= self.velocity_x
             self.velocity_x = 0
@@ -318,8 +320,8 @@ hoop_rect = pygame.Rect(hoop_x, hoop_y, hoop_width, hoop_height)
 
 # Initialize game objects
 avatar = Avatar(100, 400, 17)
-ball = Ball(400, 300, 25, RED, 3, 3)
-ball2 = Ball(200, 100, 25, RED, -3, 3)
+ball = Ball(random.randint(100, WIDTH - 50), random.randint(50, HEIGHT - 50), 25, RED, 3, 3)
+ball2 = Ball(random.randint(100, WIDTH - 50), random.randint(50, HEIGHT - 50), 25, RED, -3, 3)
 power_boxes = []
 
 # Power-up/down display variables
@@ -429,8 +431,8 @@ while running:
                     if event.key == pygame.K_r:  # Restart game
                         # Reset game state
                         avatar = Avatar(100, 400, 17)
-                        ball = Ball(400, 300, 25, RED, 3, 3)
-                        ball2 = Ball(200, 100, 25, RED, -3, 3)
+                        ball = Ball(400, 200, 25, RED, 3, 3)
+                        ball2 = Ball(500, 450, 25, RED, -3, 3)
                         power_boxes = []
                         game_over = False
                         running = True  # Resume game after restart
@@ -445,8 +447,8 @@ while running:
         if keys[pygame.K_r]:
             # Reset game state
             avatar = Avatar(100, 400, 17)
-            ball = Ball(400, 300, 25, RED, 3, 3)
-            ball2 = Ball(200, 100, 25, RED, -3, 3)
+            ball = Ball(350, 200, 25, RED, 3, 3)
+            ball2 = Ball(450, 400, 25, RED, -3, 3)
             power_boxes = []
             game_won = False
         if keys[pygame.K_q]:
