@@ -39,6 +39,11 @@ This is a simple obstacle jumping game built using Pygame. The player controls a
     python jumping_game.py
     ```
 
+4. Run the WebGL file
+    ```sh
+    start RippleWaves.html
+    ```    
+
 ## File Structure
 
 - `jumping_game.py`: Main game logic and implementation.
