@@ -1,6 +1,8 @@
-# Obstacle Jumping Game
+# Obstacle Jumping Game & Simple Wave Ripple Simulator
 
-This is a simple obstacle jumping game built using Pygame. The player controls an avatar that can jump, move left, and move right to avoid obstacles and collect power-ups.
+This is a simple obstacle jumping game built using Pygame. The player controls an avatar that can jump, move left, and move right to avoid obstacles and collect power-ups. 
+
+There is also a simple wave ripple simulator that when a user clicks the mouse the waves appear.
 
 ## Features
 
