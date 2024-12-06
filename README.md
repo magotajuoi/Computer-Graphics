@@ -55,9 +55,6 @@ This is a simple obstacle jumping game built using Pygame. The player controls a
 - Python 3.x
 - Pygame
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
