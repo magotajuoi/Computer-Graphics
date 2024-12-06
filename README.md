@@ -25,26 +25,30 @@ There is also a simple wave ripple simulator that when a user clicks the mouse t
 
 ## Installation
 
-1. Clone the repository:
+1. Install Python:
+    - Download and install Python from the official website: [python.org](https://www.python.org/downloads/)
+    - Make sure to add Python to your system PATH during installation.
+
+2. Clone the repository:
     ```sh
-    git clone https://github.com/magotajuoi/Obstacle-jumping-Game.git
+    git clone https://github.com/magotajuoi/Computer-Graphics-final-project.git
     cd Computer-Graphics-final-project
     ```
 
-2. Install the required dependencies:
+3. Install the required dependencies:
     ```sh
     pip install pygame
     ```
 
-3. Run the game:
+4. Run the game:
     ```sh
     python jumping_game.py
     ```
 
-4. Run the WebGL file
+5. Run the WebGL file:
     ```sh
     start RippleWaves.html
-    ```    
+    ```
 
 ## File Structure
 
