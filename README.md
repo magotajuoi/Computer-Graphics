@@ -25,7 +25,7 @@ This is a simple obstacle jumping game built using Pygame. The player controls a
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/magotajuoi/Computer-Graphics-final-project.git
+    git clone https://github.com/magotajuoi/Obstacle-jumping-Game.git
     cd Computer-Graphics-final-project
     ```
 
