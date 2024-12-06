@@ -31,7 +31,7 @@ There is also a simple wave ripple simulator that when a user clicks the mouse t
 
 2. Clone the repository:
     ```sh
-    git clone https://github.com/magotajuoi/Computer-Graphics-final-project.git
+    git clone https://github.com/magotajuoi/Obstacle-jumping-Game.git
     cd Computer-Graphics-final-project
     ```
 
