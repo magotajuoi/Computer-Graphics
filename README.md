@@ -32,7 +32,7 @@ There is also a simple wave ripple simulator that when a user clicks the mouse t
 2. Clone the repository:
     ```sh
     git clone https://github.com/magotajuoi/Obstacle-jumping-Game.git
-    cd Computer-Graphics-final-project
+    cd Obstacle-Jumping-Game-Wave-Ripple-Project
     ```
 
 3. Install the required dependencies:
