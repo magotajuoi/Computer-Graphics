@@ -48,6 +48,7 @@ This is a simple obstacle jumping game built using Pygame. The player controls a
 
 - `jumping_game.py`: Main game logic and implementation.
 - `README.md`: Project documentation.
+- `RippleWaves.html`: WebGL ripple effect implementation.
 
 ## Dependencies
 
