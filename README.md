@@ -24,3 +24,37 @@ This is a simple obstacle jumping game built using Pygame. The player controls a
 ## Installation
 
 1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/obstacle-jumping-game.git
+    cd obstacle-jumping-game
+    ```
+
+2. Install the required dependencies:
+    ```sh
+    pip install pygame
+    ```
+
+3. Run the game:
+    ```sh
+    python jumping_game.py
+    ```
+
+## File Structure
+
+- `jumping_game.py`: Main game logic and implementation.
+- `README.md`: Project documentation.
+
+## Dependencies
+
+- Python 3.x
+- Pygame
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- Pygame library for game development.
+- Sound effects from [freesound.org](https://freesound.org).
+
